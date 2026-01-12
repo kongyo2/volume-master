@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Volume Master</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- ヘッダー -->
+      <header class="header">
+        <div class="logo">
+          <span class="logo-icon">🎵</span>
+          <h1>Volume Master</h1>
+        </div>
+        <p class="subtitle">システムボリュームコントローラー</p>
+      </header>
+
+      <!-- メインコンテンツ -->
+      <main class="main-content">
+        <!-- ボリューム表示エリア -->
+        <div class="volume-display-container">
+          <div class="volume-ring">
+            <div class="volume-inner">
+              <span id="volume-display" class="volume-value">--%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- プログレスバー -->
+        <div class="volume-bar-container">
+          <div class="volume-bar-track">
+            <div id="volume-bar" class="volume-bar-fill"></div>
+          </div>
+        </div>
+
+        <!-- コントロールボタン -->
+        <div class="controls">
+          <button id="volume-down-btn" class="control-btn control-btn-down" aria-label="ボリュームダウン">
+            <span class="btn-icon">−</span>
+            <span class="btn-label">Down</span>
+          </button>
+          <button id="volume-up-btn" class="control-btn control-btn-up" aria-label="ボリュームアップ">
+            <span class="btn-icon">+</span>
+            <span class="btn-label">Up</span>
+          </button>
+        </div>
+
+        <!-- フィードバックインジケーター -->
+        <div class="feedback-indicator"></div>
+
+        <!-- ショートカット情報 -->
+        <div class="shortcut-info">
+          <div class="shortcut-item">
+            <kbd>Alt</kbd> + <kbd>↑</kbd>
+            <span>ボリュームアップ</span>
+          </div>
+          <div class="shortcut-item">
+            <kbd>Alt</kbd> + <kbd>↓</kbd>
+            <span>ボリュームダウン</span>
+          </div>
+        </div>
+      </main>
+
+      <!-- ステータスメッセージ -->
+      <div id="status-message" class="status-message"></div>
+
+      <!-- フッター -->
+      <footer class="footer">
+        <p>グローバルホットキーでいつでも音量調整</p>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
