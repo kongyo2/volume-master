@@ -1,0 +1,50 @@
+name: Build Windows Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag (e.g., v0.1.0)'
+        required: true
+        default: 'v0.1.0'
+      prerelease:
+        description: 'Is this a pre-release?'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.event.inputs.release_tag }}
+          releaseName: 'Volume Master ${{ github.event.inputs.release_tag }}'
+          releaseBody: 'Windows release for Volume Master'
+          releaseDraft: false
+          prerelease: ${{ github.event.inputs.prerelease }}
