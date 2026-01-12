@@ -27,6 +27,9 @@ pub fn run() {
     let shortcut_up = Shortcut::new(Some(Modifiers::ALT), Code::ArrowUp);
     let shortcut_down = Shortcut::new(Some(Modifiers::ALT), Code::ArrowDown);
 
+    // MCP Bridge プラグインはデバッグビルドのみで有効なため、
+    // リリースビルドでは mut が不要になる
+    #[allow(unused_mut)]
     let mut builder = tauri::Builder::default();
 
     // MCP Bridge プラグイン (デバッグビルドのみ)
